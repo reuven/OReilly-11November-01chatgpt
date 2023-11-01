@@ -68,21 +68,20 @@ def print_differences(current_city, current_weather, destination_city, destinati
     print(f"Humidity Difference: {differences['humidity_diff']}%")
     print(f"Precipitation Difference: {differences['precipitation_diff']}mm/h")
 
-# Gets the current and destination cities from the user.
-parser = argparse.ArgumentParser(description="Compare weather between two cities.")
-parser.add_argument('-c', '--current', type=str, required=True, help="Name of the current city.")
-parser.add_argument('-d', '--destination', type=str, required=True, help="Name of the destination city.")
-args = parser.parse_args()
-
-# Now you can use args.current and args.destination in your code
-current_weather = get_city_weather(args.current)
-destination_weather = get_city_weather(args.destination)
-
-# Using the function with your code
-differences = get_differences(current_weather, destination_weather)
-
-
-
-# Sample usage
-differences = get_differences(current_weather, destination_weather)
-print_differences(current_city, current_weather, destination_city, destination_weather, differences)
+def main():
+    # Gets the current and destination cities from the user.
+    parser = argparse.ArgumentParser(description="Compare weather between two cities.")
+    parser.add_argument('-c', '--current', type=str, required=True, help="Name of the current city.")
+    parser.add_argument('-d', '--destination', type=str, required=True, help="Name of the destination city.")
+    args = parser.parse_args()
+    
+    # Now you can use args.current and args.destination in your code
+    current_weather = get_city_weather(args.current)
+    destination_weather = get_city_weather(args.destination)
+    
+    # Using the function with your code
+    differences = get_differences(current_weather, destination_weather)
+    
+    # Sample usage
+    differences = get_differences(current_weather, destination_weather)
+    print_differences(current_city, current_weather, destination_city, destination_weather, differences)
