@@ -11,6 +11,6 @@ If you liked this training, you might also like:
 - My YouTube channel: https://YouTube.com/reuvenlerner
 - My book, "Python Workout": https://PythonWorkout.com/
 - My book, "Pandas Workout": https://PythonWorkout.com/
-- My new newsletter, "Bamboo Weekly," where I analyze data related to current events using Pandas: https://www.BambooWeekly.com/
+- My newsletter, "Bamboo Weekly," where I analyze data related to current events using Pandas: https://www.BambooWeekly.com/
 
 And of course, you can read more about me at https://lerner.co.il/
