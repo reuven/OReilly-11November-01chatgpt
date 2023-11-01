@@ -74,10 +74,13 @@ def main():
     parser.add_argument('-c', '--current', type=str, required=True, help="Name of the current city.")
     parser.add_argument('-d', '--destination', type=str, required=True, help="Name of the destination city.")
     args = parser.parse_args()
+
+    current_city = args.current
+    destination_city = args.destination
     
     # Now you can use args.current and args.destination in your code
-    current_weather = get_city_weather(args.current)
-    destination_weather = get_city_weather(args.destination)
+    current_weather = get_city_weather(current_city)
+    destination_weather = get_city_weather(destination_city)
     
     # Using the function with your code
     differences = get_differences(current_weather, destination_weather)
