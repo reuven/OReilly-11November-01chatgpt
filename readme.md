@@ -1,6 +1,6 @@
 # Data from my "Pair Programming with ChatGPT" course
 
-This repo contains the Jupyter notebook + program files from my training for O'Reilly in November 2023.
+This repo contains the Jupyter notebook + program files from my training for O'Reilly in November 2023.  It'll remain open, so you can review the material later on. Also, I'll add the conversations from ChatGPT, so you can review those, as well.
 
 Enjoy!
 
