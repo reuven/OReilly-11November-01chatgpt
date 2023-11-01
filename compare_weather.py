@@ -28,7 +28,7 @@ def get_city_weather(city_name):
             humidity = data['main']['humidity']
             precipitation = data["rain"]["1h"] if "rain" in data else 0  # Assumes rain data is in mm/h
             
-            return {'temp':temperature, 'humidity':humidity, 'precipitation':precipitation}
+            return {'temp':temperature, 'humidity':humidity, 'precipitation':precipitation, 'city':city_name}
         else:
             print("Error retrieving weather data.")
     
