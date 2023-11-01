@@ -85,3 +85,6 @@ def main():
     # Sample usage
     differences = get_differences(current_weather, destination_weather)
     print_differences(current_city, current_weather, destination_city, destination_weather, differences)
+
+if __name__ == '__main__':
+    main()
