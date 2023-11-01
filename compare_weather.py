@@ -1,5 +1,6 @@
 import requests
 import os
+import argparse
 
 def get_city_weather(city_name):
 
@@ -68,15 +69,14 @@ def print_differences(current_city, current_weather, destination_city, destinati
     print(f"Precipitation Difference: {differences['precipitation_diff']}mm/h")
 
 # Gets the current and destination cities from the user.
-current_city = input('Enter current city: ').strip()
-destination_city = input('Enter destination city: ').strip()
+parser = argparse.ArgumentParser(description="Compare weather between two cities.")
+parser.add_argument('-c', '--current', type=str, required=True, help="Name of the current city.")
+parser.add_argument('-d', '--destination', type=str, required=True, help="Name of the destination city.")
+args = parser.parse_args()
 
-# Get the weather for my current city, and put into a data structure.
-current_weather = get_city_weather(current_city)
-
-# Get the weather for the destination city, and put into a data structure.
-destination_weather = get_city_weather(destination_city)
-
+# Now you can use args.current and args.destination in your code
+current_weather = get_city_weather(args.current)
+destination_weather = get_city_weather(args.destination)
 
 # Using the function with your code
 differences = get_differences(current_weather, destination_weather)
