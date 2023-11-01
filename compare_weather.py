@@ -2,6 +2,11 @@ import requests
 import os
 import argparse
 
+from rich import print
+from rich.table import Table
+from rich.console import Console
+
+
 def get_city_weather(city_name):
 
     base_url = "http://api.openweathermap.org/data/2.5/weather"
@@ -51,9 +56,6 @@ def get_differences(current_weather, destination_weather):
         'precipitation_diff': precipitation_difference
     }
 
-from rich import print
-from rich.table import Table
-from rich.console import Console
 
 def print_differences(current_weather, destination_weather, differences):
     console = Console()
@@ -102,7 +104,7 @@ def main():
     
     # Sample usage
     differences = get_differences(current_weather, destination_weather)
-    print_differences(current_city, current_weather, destination_city, destination_weather, differences)
+    print_differences(current_weather, destination_weather, differences)
 
 if __name__ == '__main__':
     main()
