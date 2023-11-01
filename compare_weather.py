@@ -51,22 +51,37 @@ def get_differences(current_weather, destination_weather):
         'precipitation_diff': precipitation_difference
     }
 
-# Pass all three data structures to a function that displays them nicely for the user.
-def print_differences(current_city, current_weather, destination_city, destination_weather, differences):
-    print(f"Weather for {current_city}:")
-    print(f"Temperature: {current_weather['temp']}°C")
-    print(f"Humidity: {current_weather['humidity']}%")
-    print(f"Precipitation: {current_weather['precipitation']}mm/h\n")
+from rich import print
+from rich.table import Table
+from rich.console import Console
 
-    print(f"Weather for {destination_city}:")
-    print(f"Temperature: {destination_weather['temp']}°C")
-    print(f"Humidity: {destination_weather['humidity']}%")
-    print(f"Precipitation: {destination_weather['precipitation']}mm/h\n")
+def print_differences(current_weather, destination_weather, differences):
+    console = Console()
 
-    print("Differences between the two cities:")
-    print(f"Temperature Difference: {differences['temp_diff']}°C")
-    print(f"Humidity Difference: {differences['humidity_diff']}%")
-    print(f"Precipitation Difference: {differences['precipitation_diff']}mm/h")
+    # Creating tables for each city's weather and differences
+    current_table = Table(title=f"[bold magenta]Weather in {current_weather['city']}[/bold magenta]")
+    destination_table = Table(title=f"[bold cyan]Weather in {destination_weather['city']}[/bold cyan]")
+    differences_table = Table(title="[bold yellow]Differences[/bold yellow]")
+
+    # Adding columns to each table
+    for table in [current_table, destination_table, differences_table]:
+        table.add_column("Attribute", style="dim", width=12)
+        table.add_column("Value")
+
+    # Adding rows to each table
+    for attribute, value in current_weather.items():
+        if attribute != 'city':
+            current_table.add_row(attribute, str(value))
+    for attribute, value in destination_weather.items():
+        if attribute != 'city':
+            destination_table.add_row(attribute, str(value))
+    for attribute, value in differences.items():
+        differences_table.add_row(attribute, str(value))
+
+    # Printing tables
+    console.print(current_table)
+    console.print(destination_table)
+    console.print(differences_table)
 
 def main():
     # Gets the current and destination cities from the user.
