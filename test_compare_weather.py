@@ -1,4 +1,5 @@
 import pytest
+import requests
 from compare_weather import get_city_weather
 
 def test_get_city_weather_success(mocker):
