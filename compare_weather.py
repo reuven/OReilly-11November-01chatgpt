@@ -1,12 +1,34 @@
-# Gets the current and destination cities from the user.
-current_city = input('Enter current city: ').strip()
-destination_city = input('Enter destination city: ').strip()
+import requests
+import os
 
-# Get the weather for my current city, and put into a data structure.
-current_weather = get_city_weather(current_city)
+def get_city_weather(city_name):
 
-# Get the weather for the destination city, and put into a data structure.
-destination_weather = get_city_weather(destination_city)
+    base_url = "http://api.openweathermap.org/data/2.5/weather"
+    api_key = os.environ.get("OPENWEATHER_API_KEY")
+    
+    params = {
+        'q': city_name,
+        'appid': api_key,
+        'units': 'metric'
+    }
+    
+    try:
+        r = requests.get(base_url, params=params)
+        r.raise_for_status()  # Raise an error for bad responses
+        
+        data = r.json()
+        if 'main' in data:
+            temperature = data['main']['temp']
+            humidity = data['main']['humidity']
+            precipitation = data["rain"]["1h"] if "rain" in data else 0  # Assumes rain data is in mm/h
+            
+            return {'temp':temperature, 'humidity':humidity, 'precipitation':precipitation}
+        else:
+            print("Error retrieving weather data.")
+    
+    except requests.RequestException as e:
+        print(f"Error fetching data from OpenWeatherMap: {e}")
+
 
 # Compare the two weather reports, and put into a third data structure.
 def get_differences(current_weather, destination_weather):
@@ -28,10 +50,6 @@ def get_differences(current_weather, destination_weather):
         'precipitation_diff': precipitation_difference
     }
 
-# Using the function with your code
-differences = get_differences(current_weather, destination_weather)
-
-
 # Pass all three data structures to a function that displays them nicely for the user.
 def print_differences(current_city, current_weather, destination_city, destination_weather, differences):
     print(f"Weather for {current_city}:")
@@ -48,6 +66,22 @@ def print_differences(current_city, current_weather, destination_city, destinati
     print(f"Temperature Difference: {differences['temp_diff']}°C")
     print(f"Humidity Difference: {differences['humidity_diff']}%")
     print(f"Precipitation Difference: {differences['precipitation_diff']}mm/h")
+
+# Gets the current and destination cities from the user.
+current_city = input('Enter current city: ').strip()
+destination_city = input('Enter destination city: ').strip()
+
+# Get the weather for my current city, and put into a data structure.
+current_weather = get_city_weather(current_city)
+
+# Get the weather for the destination city, and put into a data structure.
+destination_weather = get_city_weather(destination_city)
+
+
+# Using the function with your code
+differences = get_differences(current_weather, destination_weather)
+
+
 
 # Sample usage
 differences = get_differences(current_weather, destination_weather)
